@@ -61,11 +61,8 @@ int main(void)
 			// The c.Calculate(x, oper, y); expression calls the Calculate function defined earlier, and supplies the entered input values. 
 			// The function then returns a number that gets stored in resul
 		}
-
 		cout << "Result is: " << result << endl;
 		// Finally, result is printed to the console, so the user sees the result of the calculation.
 	}
-
 	return 0;
 }
-
