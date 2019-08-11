@@ -28,17 +28,21 @@ vector<int> ParseLine(string line)
 	return v;
 }
 
-void ReadBoardFile(string path)
+// This function should accept a string argument, which represents the path to the file
+vector<vector<int>> ReadBoardFile(string path)
 {
+	vector<vector<int>> board;
 	ifstream myfile(path);
 	if (myfile)
 	{
 		string line;
 		while (getline(myfile, line))
 		{
-			cout << line << "\n";
+			vector<int> row = ParseLine(line);
+			board.push_back(row);
 		}
 	}
+	return board;
 }
 
 void PrintBoard(const vector<vector<int>> board)
@@ -53,11 +57,13 @@ void PrintBoard(const vector<vector<int>> board)
 	}
 }
 
-#include "test.cpp" // For testing.
+//#include "test.cpp" // For testing.
 
 int main()
 {
-	ReadBoardFile("C:/Users/diogo/OneDrive/Work/CS/OOP/cpp-code/test/test/files/1.board");
-	// PrintBoard(board);
-	TestParseLine(); // For testing.
+	vector<vector<int>> board;
+	//string s = "files/1.board"; // for linux command line this path is enough
+	string s = "C:/Users/diogo/OneDrive/Work/CS/OOP/cpp-code/project1_route_planner/board/board/files/1.board";
+	board = ReadBoardFile(s);
+	PrintBoard(board);
 }
