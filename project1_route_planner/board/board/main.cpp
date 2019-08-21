@@ -58,6 +58,19 @@ vector<vector<State>> ReadBoardFile(string path)
 	return board;
 }
 
+/**
+ * Implementation of A* search algorithm
+ * Search function which takes a board grid and two length 2 int arrays as
+ * arguments. The int arrays will represent the start and goal coordinates
+ * for the search.
+ */
+vector<vector<State>> Search(vector<vector<State>> grid, int initial_point[2], int goal_point[2])
+{
+	vector<vector<State>> board{};
+	cout << "No path found!\n";
+	return board;
+}
+
 // CellString function accepts a State as input
 // and returns the following strings:
 // "⛰️   " if the input equals a kObstacle,
@@ -85,13 +98,15 @@ void PrintBoard(const vector<vector<State>> board)
 	}
 }
 
-//#include "test.cpp" // For testing.
-
 int main()
 {
-	// vector<vector<int>> board;
+
+	int init[2] = { 0, 0 }; //vector<int> init{0, 0};
+	int goal[2] = { 4, 5 }; //vector<int> goal{4, 5};
+	string s = "C:/Users/diogo/OneDrive/Work/CS/OOP/cpp-code/test/test/files/1.board";
 	//string s = "files/1.board"; // for linux command line this path is enough
-	string s = "C:/Users/diogo/OneDrive/Work/CS/OOP/cpp-code/test/test/files/1.board"; 
+	// vector<vector<int>> board;
 	auto board = ReadBoardFile(s);
-	PrintBoard(board);
+	auto solution = Search(board, init, goal);
+	PrintBoard(solution);
 }
