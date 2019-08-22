@@ -59,6 +59,19 @@ vector<vector<State>> ReadBoardFile(string path)
 }
 
 /**
+ * Heuristic function that is used to guide the A* search.
+ * In general, any admissible function can be used for the heuristic,
+ * but for this project, it takes a pair of 2D coordinates on the grid
+ * (x1, y1, x2, y2) and returns the Manhattan Distance from one coordinate
+ * to the other: ∣x2 − x1∣ + ∣y2 − y1∣.
+ * (The Euclidean distance is the unique shortest path actually)
+*/
+int Heuristic(int x1, int y1, int x2, int y2)
+{
+	return abs(x2 - x1) + abs(y2 - y1);
+}
+
+/**
  * Implementation of A* search algorithm
  * Search function which takes a board grid and two length 2 int arrays as
  * arguments. The int arrays will represent the start and goal coordinates
@@ -98,6 +111,8 @@ void PrintBoard(const vector<vector<State>> board)
 	}
 }
 
+#include "test.cpp" // For testing solution
+
 int main()
 {
 
@@ -109,4 +124,6 @@ int main()
 	auto board = ReadBoardFile(s);
 	auto solution = Search(board, init, goal);
 	PrintBoard(solution);
+	// Tests
+	TestHeuristic();
 }
