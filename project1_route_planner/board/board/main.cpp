@@ -4,6 +4,7 @@
 #include <vector>
 #include <sstream>
 
+using std::abs;
 using std::cout;
 using std::ifstream;
 using std::istringstream;
@@ -13,7 +14,8 @@ using std::vector;
 enum class State
 {
 	kEmpty,
-	kObstacle
+	kObstacle,
+	kClosed
 };
 
 // ParseLine function accepts a string as an argument.
@@ -72,6 +74,24 @@ int Heuristic(int x1, int y1, int x2, int y2)
 }
 
 /**
+ * A* search, the search algorithm keeps a list of potential board cells to search through.
+ * A board cell is a node and each node will consist of the following values which are needed for the A* algorithm: an x and y coordinate, the g value (or cost) that has accumulated up to that cell and the h value for the cell, given by the heuristic function.
+ * AddToOpen function which accepts the following arguments:
+ *      - x, y, g, and h values
+ *      - References to one vector<vector<int>> for the vector of open nodes.
+ *      - Reference to one vector<vector<State>> for the grid.
+ * The AddToOpen function should do two things:
+ *      - Create a vector<int> node with the form {x, y, g, h} and push the node to the back of the open vector.
+ *      - Set the grid value for the x and y coordinates to the enum value kClosed.
+*/
+void AddToOpen(int x, int y, int g, int h, vector<vector<int>>& open, vector<vector<State>>& grid)
+{
+	vector<int> node{ x, y, g, h };
+	open.push_back(node);
+	grid[x][y] = State::kClosed;
+}
+
+/**
  * Implementation of A* search algorithm
  * Search function which takes a board grid and two length 2 int arrays as
  * arguments. The int arrays will represent the start and goal coordinates
@@ -115,7 +135,6 @@ void PrintBoard(const vector<vector<State>> board)
 
 int main()
 {
-
 	int init[2] = { 0, 0 }; //vector<int> init{0, 0};
 	int goal[2] = { 4, 5 }; //vector<int> goal{4, 5};
 	string s = "C:/Users/diogo/OneDrive/Work/CS/OOP/cpp-code/test/test/files/1.board";
@@ -126,4 +145,5 @@ int main()
 	PrintBoard(solution);
 	// Tests
 	TestHeuristic();
+	TestAddToOpen();
 }
