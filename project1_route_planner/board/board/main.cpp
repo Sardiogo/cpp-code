@@ -99,6 +99,12 @@ void AddToOpen(int x, int y, int g, int h, vector<vector<int>>& open, vector<vec
  */
 vector<vector<State>> Search(vector<vector<State>> grid, int initial_point[2], int goal_point[2])
 {
+	vector<vector<int>> open{}; // Create the vector of open nodes.
+	// Initialize the starting node.
+	int g = 0;
+	int h = Heuristic(initial_point[0], initial_point[1], goal_point[0], goal_point[1]);
+	// Use AddToOpen to add the starting node to the open vector.
+	AddToOpen(initial_point[0], initial_point[1], g, h, open, grid);
 	vector<vector<State>> board{};
 	cout << "No path found!\n";
 	return board;
@@ -137,8 +143,8 @@ int main()
 {
 	int init[2] = { 0, 0 }; //vector<int> init{0, 0};
 	int goal[2] = { 4, 5 }; //vector<int> goal{4, 5};
-	string s = "C:/Users/diogo/OneDrive/Work/CS/OOP/cpp-code/test/test/files/1.board";
-	//string s = "files/1.board"; // for linux command line this path is enough
+	string s = "D:/OneDrive/Work/CS/OOP/cpp-code/project1_route_planner/board/board/files/1.board";
+	// string s = "files/1.board"; // for linux command line this path is enough
 	// vector<vector<int>> board;
 	auto board = ReadBoardFile(s);
 	auto solution = Search(board, init, goal);
