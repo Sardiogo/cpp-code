@@ -61,6 +61,30 @@ vector<vector<State>> ReadBoardFile(string path)
 }
 
 /**
+ * bool Compare function to compare the f-value of two nodes.
+ *  accepts two nodes of type vector<int> as arguments.
+ * It should return a boolean true if the f-value of the first argument is greater than the f-value of the second, and it should return false otherwise.
+ * Recall that the f-value is the sum of the cost and heuristic: f = g + h.
+*/
+
+bool Compare(vector<int> node_1, vector<int> node_2)
+{
+	// nodes {x, y, g, h}
+	int g_node_1 = node_1[2];
+	int h_node_1 = node_1[3];
+	int f_node_1 = g_node_1 + h_node_1;
+
+	int g_node_2 = node_1[2];
+	int h_node_2 = node_2[3];
+	int f_node_2 = g_node_2 + h_node_2;
+
+	if (f_node_1 > f_node_2)
+		return true; // any number != 0 ; default is 1.
+	else
+		return false; // 0
+}
+
+/**
  * Heuristic function that is used to guide the A* search.
  * In general, any admissible function can be used for the heuristic,
  * but for this project, it takes a pair of 2D coordinates on the grid
@@ -152,4 +176,5 @@ int main()
 	// Tests
 	TestHeuristic();
 	TestAddToOpen();
+	TestCompare();
 }
