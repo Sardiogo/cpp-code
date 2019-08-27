@@ -218,3 +218,56 @@ void TestCompare()
 		<< "\n";
 	return;
 }
+
+void TestSearch()
+{
+	cout << "----------------------------------------------------------"
+		<< "\n";
+	cout << "Search Function Test (Partial): ";
+	int goal[2]{ 4, 5 };
+	string f = "D:/OneDrive/Work/CS/OOP/cpp-code/project1_route_planner/board/board/files/1.board";
+	//string s = "files/1.board"; // for linux command line this path is enough
+	auto board = ReadBoardFile(f);
+
+	std::cout.setstate(std::ios_base::failbit); // Disable cout
+	auto output = Search(board, goal, goal);
+	std::cout.clear(); // Enable cout
+
+	vector<vector<State>> solution{
+		 {State::kEmpty, State::kObstacle, State::kEmpty, State::kEmpty, State::kEmpty, State::kEmpty},
+		 {State::kEmpty, State::kObstacle, State::kEmpty, State::kEmpty, State::kEmpty, State::kEmpty},
+		 {State::kEmpty, State::kObstacle, State::kEmpty, State::kEmpty, State::kEmpty, State::kEmpty},
+		 {State::kEmpty, State::kObstacle, State::kEmpty, State::kEmpty, State::kEmpty, State::kEmpty},
+		 {State::kEmpty, State::kEmpty, State::kEmpty, State::kEmpty, State::kObstacle, State::kPath} };
+
+	if (output != solution)
+	{
+		cout << "failed"
+			<< "\n";
+		cout << "Search(board, {4,5}, {4,5})"
+			<< "\n";
+		cout << "Solution board: "
+			<< "\n";
+		PrintVectorOfVectors(solution);
+		cout << "Your board: "
+			<< "\n";
+		PrintVectorOfVectors(output);
+		cout << "\n";
+	}
+	else
+	{
+		cout << "passed"
+			<< "\n";
+		cout << "Search(board, {4,5}, {4,5})"
+			<< "\n";
+		cout << "Solution board: "
+			<< "\n";
+		PrintVectorOfVectors(solution);
+		cout << "Your board: "
+			<< "\n";
+		PrintVectorOfVectors(output);
+		cout << "\n";
+	}
+	cout << "----------------------------------------------------------"
+		<< "\n";
+}
