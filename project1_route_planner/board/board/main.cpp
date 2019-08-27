@@ -110,6 +110,24 @@ int Heuristic(int x1, int y1, int x2, int y2)
 }
 
 /**
+ *  In order to expand your A* search from the current node to neighboring nodes, you first will need to check that neighboring grid cells are not closed, and that they are not an obstacle.
+ * CheckValidCell accepts two ints for the x and y coordinates and a reference to the grid
+ * The function should do two things:
+ *      - Check that the (x, y) coordinate pair is on the grid.
+ *      - Check that the grid at (x, y) is kEmpty (this is the default case if the grid cell is not kClosed or a kObstacle). If both of these conditions are true, then CheckValidCell should return true. Otherwise, it should return false.
+*/
+bool CheckValidCell(int x, int y, vector<vector<State>>& grid)
+{
+	// Check that the (x, y) coordinate pair is on the grid.
+	bool on_grid_x = (x >= 0 && x < grid.size());
+	bool on_grid_y = (y >= 0 && y < grid[0].size());
+	if (on_grid_x && on_grid_y)
+		// Check that the grid at (x, y) is kEmpty
+		return grid[x][y] == State::kEmpty;
+	return false;
+}
+
+/**
  * A* search, the search algorithm keeps a list of potential board cells to search through.
  * A board cell is a node and each node will consist of the following values which are needed for the A* algorithm: an x and y coordinate, the g value (or cost) that has accumulated up to that cell and the h value for the cell, given by the heuristic function.
  * AddToOpen function which accepts the following arguments:
@@ -177,6 +195,7 @@ vector<vector<State>> Search(vector<vector<State>> grid, int initial_point[2], i
 //  "0   " otherwise.
 string CellString(State cell)
 {
+	// To use UTF-8 string literals you need to prefix them with u8 
 	switch (cell)
 	{
 	case State::kObstacle:
@@ -190,6 +209,7 @@ string CellString(State cell)
 
 void PrintBoard(const vector<vector<State>> board)
 {
+	// std::vector<T>::size() returns the type size_t which is unsigned. Use size_t instead of int in for cycle.
 	for (size_t i = 0; i < board.size(); i++)
 	{
 		for (size_t j = 0; j < board[i].size(); j++)
@@ -217,4 +237,5 @@ int main()
 	TestAddToOpen();
 	TestCompare();
 	TestSearch();
+	TestCheckValidCell();
 }

@@ -225,9 +225,9 @@ void TestSearch()
 		<< "\n";
 	cout << "Search Function Test (Partial): ";
 	int goal[2]{ 4, 5 };
-	string f = "D:/OneDrive/Work/CS/OOP/cpp-code/project1_route_planner/board/board/files/1.board";
+	string s = "D:/OneDrive/Work/CS/OOP/cpp-code/project1_route_planner/board/board/files/1.board";
 	//string s = "files/1.board"; // for linux command line this path is enough
-	auto board = ReadBoardFile(f);
+	auto board = ReadBoardFile(s);
 
 	std::cout.setstate(std::ios_base::failbit); // Disable cout
 	auto output = Search(board, goal, goal);
@@ -266,6 +266,64 @@ void TestSearch()
 		cout << "Your board: "
 			<< "\n";
 		PrintVectorOfVectors(output);
+		cout << "\n";
+	}
+	cout << "----------------------------------------------------------"
+		<< "\n";
+}
+
+void TestCheckValidCell()
+{
+	cout << "----------------------------------------------------------"
+		<< "\n";
+	cout << "CheckValidCell Function Test: ";
+	vector<vector<State>> grid{
+		 {State::kClosed, State::kObstacle, State::kEmpty, State::kEmpty, State::kEmpty, State::kEmpty},
+		 {State::kClosed, State::kObstacle, State::kEmpty, State::kEmpty, State::kEmpty, State::kEmpty},
+		 {State::kClosed, State::kObstacle, State::kEmpty, State::kEmpty, State::kEmpty, State::kEmpty},
+		 {State::kClosed, State::kObstacle, State::kEmpty, State::kEmpty, State::kEmpty, State::kEmpty},
+		 {State::kClosed, State::kClosed, State::kEmpty, State::kEmpty, State::kObstacle, State::kEmpty} };
+
+	if (CheckValidCell(0, 0, grid))
+	{
+		cout << "failed"
+			<< "\n";
+		cout << "\n"
+			<< "Test grid is: "
+			<< "\n";
+		PrintVectorOfVectors(grid);
+		cout << "Cell checked: (0, 0)"
+			<< "\n";
+		cout << "\n";
+	}
+	else if (!CheckValidCell(4, 2, grid))
+	{
+		cout << "failed"
+			<< "\n";
+		cout << "\n"
+			<< "Test grid is: "
+			<< "\n";
+		PrintVectorOfVectors(grid);
+		cout << "Cell checked: (4, 2)"
+			<< "\n";
+		cout << "\n";
+	}
+	else
+	{
+		cout << "passed"
+			<< "\n";
+		cout << "\n"
+			<< "Test grid is: "
+			<< "\n";
+		PrintVectorOfVectors(grid);
+		cout << "Cell checked: (0, 0)"
+			<< "\n";
+		cout << "\n"
+			<< "Test grid is: "
+			<< "\n";
+		PrintVectorOfVectors(grid);
+		cout << "Cell checked: (4, 2)"
+			<< "\n";
 		cout << "\n";
 	}
 	cout << "----------------------------------------------------------"
